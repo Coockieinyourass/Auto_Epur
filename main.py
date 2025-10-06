@@ -21,6 +21,15 @@ label = Label(text="Hello Tkinter") # текстовая метка
 label.pack() # размещение метки
 
 btn = Button(text="Hello!", command=base_btn)
-btn.pack()
+btn.pack(side="bottom", anchor="e") # Полёження
+
+
+
+canvas = Canvas(bg="white", width=500, height=400) # Канвас...
+canvas.pack(anchor="c")
+
+canvas.create_line(100, 100, 200, 300)
+
+
 
 root.mainloop() # чтобы не закрывалось сразу
