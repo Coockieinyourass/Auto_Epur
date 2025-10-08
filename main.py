@@ -2,26 +2,35 @@ from tkinter import *
 
 
 
-XPADDING = 50
-YPADDING = 50
+SCALE = 30
+XPADDING = SCALE
+YPADDING = SCALE
 
 
 
-def finish():
-    root.destroy() # ручное закрытие окна и всего приложения
-    print("Приложение закрыто")
+def draw_spot(H, V, color):
+    canvas.create_oval(XPADDING + 10*SCALE - H*SCALE - SCALE/5, # Генерация точки по x и y координатам
+                        YPADDING + 10*SCALE - V*SCALE - SCALE/5, 
+                        XPADDING + 10*SCALE - H*SCALE + SCALE/5,
+                        YPADDING + 10*SCALE - V*SCALE + SCALE/5,
+                        fill=color)
 
 def take_cords():
-    # x = cords_taker_x.
-    # y = cords_taker_y.get()
-
+    X = float(cords_taker_x.get())
     print(cords_taker_x.get())
+    Y = float(cords_taker_y.get())
+    print(cords_taker_y.get())
+    Z = float(cords_taker_z.get())
+    print(cords_taker_z.get())
 
-    print(f"Координаты получены: x = ; y = ;")
+    print(f"Координаты получены: x = {cords_taker_x.get()}; y = {cords_taker_y.get()}; z = {cords_taker_z.get()};")
+
+    draw_spot(X, Z, "#f54242")
+    draw_spot(X, -Y, "#5af542")
+    draw_spot(-Y, Z, "#424bf5")
 
 root = Tk() # Корневой объект - окно
 root.title("Auto Epur maker") # Заголовок
-root.protocol("WM_DELETE_WINDOW", finish) # первый аргумент, условие, при котором будет выполняться второй
 root.geometry("1400x1200") # размеры окна
 # root.attributes("-fullscreen", True) # А при -alpha чёт разницы не видно никакой
 
@@ -29,24 +38,29 @@ icon = PhotoImage(file = "2914917.png")
 root.iconphoto(False, icon) # А так получилось
 # root.iconbitmap(default="favicon.ico") # иконка программы (пока не получается сделать)
 
-
-
-cords_taker_x = Entry().pack(side="right")
-cords_taker_y = Entry().pack(side="right")
-
 btn = Button(text="Enter", command=take_cords)
-btn.pack(side="right") # Полёження
+btn.pack(anchor=SE, side="bottom", padx=XPADDING, pady=YPADDING/5) # Полёження
 
-canvas = Canvas(bg="white", width=1100, height=1100) # Канвас...
-canvas.pack(anchor="c")
+cords_taker_z = Entry()
+cords_taker_z.pack(anchor=SE, side="bottom", padx=XPADDING, pady=YPADDING/5)
+cords_taker_y = Entry()
+cords_taker_y.pack(anchor=SE, side="bottom", padx=XPADDING, pady=YPADDING/5)
+cords_taker_x = Entry()
+cords_taker_x.pack(anchor=SE, side="bottom", padx=XPADDING, pady=YPADDING/5)
 
-canvas.create_line(XPADDING+500, YPADDING, XPADDING+500, YPADDING+1000, width=3.5) # Основные линии координат
-canvas.create_line(XPADDING, YPADDING+500, XPADDING+1000, YPADDING+500, width=3.5)
+
+
+canvas = Canvas(bg="white", width=22*SCALE, height=22*SCALE) # Канвас...
+canvas.pack(anchor="c", pady=5*SCALE, padx=5*SCALE)
+
+canvas.create_line(XPADDING+10*SCALE, YPADDING, XPADDING+10*SCALE, YPADDING+20*SCALE, width=3.5) # Основные линии координат
+canvas.create_line(XPADDING, YPADDING+10*SCALE, XPADDING+20*SCALE, YPADDING+10*SCALE, width=3.5)
+canvas.create_line(XPADDING, YPADDING, XPADDING+20*SCALE, YPADDING+20*SCALE) # Диагональ
 
 for c in range (22): # сетка 
-    canvas.create_line(c*50, YPADDING, c*50, 1050)
+    canvas.create_line(c*SCALE, YPADDING, c*SCALE, 21*SCALE)
 for r in range (22):
-    canvas.create_line(XPADDING, r*50, 1050, r*50)
+    canvas.create_line(XPADDING, r*SCALE, 21*SCALE, r*SCALE)
 
 
 root.mainloop() # чтобы не закрывалось сразу
