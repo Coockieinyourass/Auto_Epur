@@ -2,7 +2,7 @@ from tkinter import *
 
 
 
-SCALE = 30
+SCALE = 20
 XPADDING = SCALE
 YPADDING = SCALE
 
@@ -13,7 +13,7 @@ def draw_spot(H, V, color):
                         YPADDING + 10*SCALE - V*SCALE - SCALE/5, 
                         XPADDING + 10*SCALE - H*SCALE + SCALE/5,
                         YPADDING + 10*SCALE - V*SCALE + SCALE/5,
-                        fill=color)
+                        fill=color, tags="spot")
 
 def take_cords():
     X = float(cords_taker_x.get())
@@ -29,6 +29,11 @@ def take_cords():
     draw_spot(X, -Y, "#5af542")
     draw_spot(-Y, Z, "#424bf5")
 
+def clear_spots():
+    canvas.delete("spot")
+
+
+
 root = Tk() # Корневой объект - окно
 root.title("Auto Epur maker") # Заголовок
 root.geometry("1400x1200") # размеры окна
@@ -38,15 +43,37 @@ icon = PhotoImage(file = "2914917.png")
 root.iconphoto(False, icon) # А так получилось
 # root.iconbitmap(default="favicon.ico") # иконка программы (пока не получается сделать)
 
-btn = Button(text="Enter", command=take_cords)
-btn.pack(anchor=SE, side="bottom", padx=XPADDING, pady=YPADDING/5) # Полёження
+frame_btns = Frame(root)
+frame_btns.pack(anchor="se", side="bottom", padx=XPADDING, pady=YPADDING/5)
 
-cords_taker_z = Entry()
-cords_taker_z.pack(anchor=SE, side="bottom", padx=XPADDING, pady=YPADDING/5)
-cords_taker_y = Entry()
-cords_taker_y.pack(anchor=SE, side="bottom", padx=XPADDING, pady=YPADDING/5)
-cords_taker_x = Entry()
-cords_taker_x.pack(anchor=SE, side="bottom", padx=XPADDING, pady=YPADDING/5)
+Clear_btn  = Button(frame_btns, text="Clear", command=clear_spots)
+Clear_btn.pack(side="left")
+
+Enter_btn = Button(frame_btns, text="Enter", command=take_cords)
+Enter_btn.pack(side="left")
+
+
+
+frame_z = Frame(root)
+frame_z.pack(anchor="se", side="bottom", padx=XPADDING, pady=YPADDING/5)
+z_label = Label(frame_z, text="Z = ")
+z_label.pack(side="left")
+cords_taker_z = Entry(frame_z)
+cords_taker_z.pack(side="left")
+
+frame_y = Frame(root)
+frame_y.pack(anchor="se", side="bottom", padx=XPADDING, pady=YPADDING/5)
+y_label = Label(frame_y, text="Y = ")
+y_label.pack(side="left")
+cords_taker_y = Entry(frame_y)
+cords_taker_y.pack(side="left")
+
+frame_x = Frame(root)
+frame_x.pack(anchor="se", side="bottom", padx=XPADDING, pady=YPADDING/5)
+x_title = Label(frame_x, text="X = ")
+x_title.pack(side="left")
+cords_taker_x = Entry(frame_x)
+cords_taker_x.pack(side="left")
 
 
 
