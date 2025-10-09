@@ -29,11 +29,8 @@ def draw_spot(H, V, color, name):
 
 def take_cords():
     X = float(cords_taker_x.get())
-    # print(X)
     Y = float(cords_taker_y.get())
-    # print(Y)
     Z = float(cords_taker_z.get())
-    # print(Z)
     name = spot_name_taker.get()
     # print(name)
 
