@@ -17,22 +17,21 @@ def draw_spot(H, V, color, name):
     if(color == "#f54242"):
         canvas.create_text(XPADDING + 9.7*SCALE - H*SCALE,
                         YPADDING + 9.7*SCALE - V*SCALE,
-                        text=f"{name}2")
+                        text=f"{name}2", tags="spot")
     elif(color == "#5af542"):
         canvas.create_text(XPADDING + 9.7*SCALE - H*SCALE,
                         YPADDING + 9.7*SCALE - V*SCALE,
-                        text=f"{name}1")
+                        text=f"{name}1", tags="spot")
     elif(color == "#424bf5"):
         canvas.create_text(XPADDING + 9.7*SCALE - H*SCALE,
                         YPADDING + 9.7*SCALE - V*SCALE,
-                        text=f"{name}3")
+                        text=f"{name}3", tags="spot")
 
 def take_cords():
     X = float(cords_taker_x.get())
     Y = float(cords_taker_y.get())
     Z = float(cords_taker_z.get())
     name = spot_name_taker.get()
-    # print(name)
 
     print(f"Координаты получены: x = {X};\ny = {Y};\nz = {Z};\nимя точки - {name}")
 
@@ -48,11 +47,9 @@ def clear_spots():
 root = Tk() # Корневой объект - окно
 root.title("Auto Epur maker") # Заголовок
 root.geometry("1400x1200") # размеры окна
-# root.attributes("-fullscreen", True) # А при -alpha чёт разницы не видно никакой
 
 icon = PhotoImage(file = "2914917.png")
-root.iconphoto(False, icon) # А так получилось
-# root.iconbitmap(default="favicon.ico") # иконка программы (пока не получается сделать)
+root.iconphoto(False, icon)
 
 frame_btns = Frame(root)
 frame_btns.pack(anchor="se", side="bottom", padx=XPADDING, pady=YPADDING/5)
@@ -92,7 +89,6 @@ spot_name_title = Label(frame_spot_name, text="Имя точки: ")
 spot_name_title.pack(side="left")
 spot_name_taker = Entry(frame_spot_name)
 spot_name_taker.pack(side="left")
-
 
 
 
