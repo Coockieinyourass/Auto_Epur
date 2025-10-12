@@ -1,20 +1,15 @@
 from tkinter import *
 from tkinter import ttk
  
-def show_message():
-    label["text"] = entry.get()     # получаем введенный текст
- 
 root = Tk()
 root.title("METANIT.COM")
 root.geometry("250x200") 
  
-entry = ttk.Entry()
-entry.pack(anchor=NW, padx=6, pady=6)
-  
-btn = ttk.Button(text="Click", command=show_message)
-btn.pack(anchor=NW, padx=6, pady=6)
+val = IntVar(value=10)
  
-label = ttk.Label()
-label.pack(anchor=NW, padx=6, pady=6)
-  
+ttk.Label(textvariable=val).pack(anchor=NW)
+ 
+horizontalScale = ttk.Scale(orient=HORIZONTAL, length=200, from_=1.0, to=100.0, variable=val)
+horizontalScale.pack(anchor=NW)
+ 
 root.mainloop()
