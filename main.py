@@ -45,11 +45,14 @@ def clear_spots():
 
 
 root = Tk() # Корневой объект - окно
-root.title("Auto Epur maker") # Заголовок
-root.geometry("1400x1200") # размеры окна
+root.title("Auto Epur maker")
+root.geometry("1400x1200")
 
-icon = PhotoImage(file = "2914917.png")
-root.iconphoto(False, icon)
+try:
+    icon = PhotoImage(file = "2914917.png")
+    root.iconphoto(False, icon)
+except (TclError):
+    pass
 
 frame_btns = Frame(root)
 frame_btns.pack(anchor="se", side="bottom", padx=XPADDING, pady=YPADDING/5)
