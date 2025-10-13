@@ -95,7 +95,8 @@ def resize_canvas(event=None):
 
 frame_optns = Frame(root)
 frame_optns.pack(anchor="ne", padx=SCALE.get(), pady=SCALE.get()/5)
-
+scale_label = Label(frame_optns, text="Scale of grid")
+scale_label.pack(side="bottom")
 grid_scale = Scale(frame_optns, orient=HORIZONTAL, length=300, from_=10.0, to=50.0, variable=SCALE, command=resize_canvas)
 grid_scale.pack()
 
