@@ -51,7 +51,13 @@ def draw_spot(H, V, color, name, redraw):
         }
         points.append(point_data)
 
-def redraw_points():
+def take_2_spots():
+    # spot1 = spot_taker_1.get()
+    # spot2 = spot_taker_2.get()
+    # name = line_name_taker.get()
+    pass
+
+def redraw_spots():
     # Перерисовываем все сохраненные точки
     for pt in points:
         draw_spot(pt["H"], pt["V"], pt["color"], pt["name"], redraw=True)
@@ -89,7 +95,7 @@ def resize_canvas(event=None):
     for r in range (22):
         canvas.create_line(xp, r*SCALE.get(), 21*SCALE.get(), r*SCALE.get())
 
-    redraw_points()
+    redraw_spots()
 
 
 
