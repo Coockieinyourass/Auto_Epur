@@ -16,6 +16,7 @@ except (TclError):
 
 SCALE = IntVar(value=40)
 points = []
+lines = []
 all_panels = []
 
 
@@ -41,22 +42,48 @@ panel_lines.pack(side="left")
 
 
 
+# Line-draw panel
+frame_line_panel = Frame(root)
+all_panels.append(frame_line_panel)
+frame_line_panel.pack(anchor="se", side="bottom", padx=SCALE.get(), pady=SCALE.get()/5)
+
+# Clear and Enter buttons for lines
+frame_btns = Frame(frame_line_panel)
+frame_btns.pack(anchor="se", side="bottom", padx=SCALE.get(), pady=SCALE.get()/5)
+Clear_btn = Button(frame_btns, text="Clear", command=Drawning.clear_lines)
+Clear_btn.pack(side="left")
+Enter_btn = Button(frame_btns, text="Enter", command=Drawning.take_line_cords)
+Enter_btn.pack(side="left")
+
+# Spot_2 name field
+frame_spot_2 = Frame(frame_line_panel)
+frame_spot_2.pack(anchor="se", side="bottom", pady=SCALE.get()/5)
+spot_2_label = Label(frame_spot_2, text="Spot 2 = ")
+spot_2_label.pack(side="left")
+spot_taker_2 = Entry(frame_spot_2)
+spot_taker_2.pack(side="left")
+
+# Spot_1 name field
+frame_spot_1 = Frame(frame_line_panel)
+frame_spot_1.pack(anchor="se", side="bottom", pady=SCALE.get()/5)
+spot_1_label = Label(frame_spot_1, text="Spot 1 = ")
+spot_1_label.pack(side="left")
+spot_taker_1 = Entry(frame_spot_1)
+spot_taker_1.pack(side="left")
+
+
+
 # Spot-draw panel
 frame_spot_panel = Frame(root)
 all_panels.append(frame_spot_panel)
 frame_spot_panel.pack(anchor="se", side="bottom", padx=SCALE.get(), pady=SCALE.get()/5)
 
-# Line-draw panel
-frame_line_panel = Frame(root)
-all_panels.append(frame_line_panel)
-frame_spot_panel.pack(anchor="se", side="bottom", padx=SCALE.get(), pady=SCALE.get()/5)
-
-# Clear and Enter buttons 
+# Clear and Enter buttons for spots
 frame_btns = Frame(frame_spot_panel)
 frame_btns.pack(anchor="se", side="bottom", padx=SCALE.get(), pady=SCALE.get()/5)
 Clear_btn = Button(frame_btns, text="Clear", command=Drawning.clear_spots)
 Clear_btn.pack(side="left")
-Enter_btn = Button(frame_btns, text="Enter", command=Drawning.take_cords)
+Enter_btn = Button(frame_btns, text="Enter", command=Drawning.take_spot_cords)
 Enter_btn.pack(side="left")
 
 # Z cords field
@@ -93,9 +120,13 @@ spot_name_taker.pack(side="left")
 
 
 
+frame_line_panel.pack_forget()
+
+
+
 # Graph
 canvas = Canvas(bg="white", width=22*SCALE.get(), height=22*SCALE.get()) # Канвас...
-canvas.pack(side="left")
+canvas.pack(side="left", padx=SCALE.get())
 
 canvas.create_line(SCALE.get()+10*SCALE.get(), SCALE.get(), SCALE.get()+10*SCALE.get(), SCALE.get()+20*SCALE.get(), width=3.5) # Основные линии координат
 canvas.create_line(SCALE.get(), SCALE.get()+10*SCALE.get(), SCALE.get()+20*SCALE.get(), SCALE.get()+10*SCALE.get(), width=3.5)

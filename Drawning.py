@@ -4,7 +4,7 @@ import UI
 
 
 def draw_spot(H, V, color, name, redraw):
-    # Координаты для точки
+    # Координаты для точки (овала)
     x1 = UI.SCALE.get() + 10*UI.SCALE.get() - H*UI.SCALE.get() - UI.SCALE.get()/5
     y1 = UI.SCALE.get() + 10*UI.SCALE.get() - V*UI.SCALE.get() - UI.SCALE.get()/5
     x2 = UI.SCALE.get() + 10*UI.SCALE.get() + UI.SCALE.get()/5 - H*UI.SCALE.get()
@@ -31,24 +31,55 @@ def draw_spot(H, V, color, name, redraw):
             "H": H,
             "V": V,
             "color": color,
-            "name": name,
+            "name": text,
             "x": text_x,
             "y": text_y
         }
         UI.points.append(point_data)
 
-def take_2_spots():
-    # spot1 = spot_taker_1.get()
-    # spot2 = spot_taker_2.get()
-    # name = line_name_taker.get()
-    pass
+def draw_line(X_spot_1, Y_spot_1, Z_spot_1, X_spot_2, Y_spot_2, Z_spot_2, redraw):
+    UI.canvas.create_line(
+        UI.SCALE.get() + 10*UI.SCALE.get() - X_spot_1[0]*UI.SCALE.get(),
+        UI.SCALE.get() + 10*UI.SCALE.get() - X_spot_1[1]*UI.SCALE.get(),
+        UI.SCALE.get() + 10*UI.SCALE.get() - X_spot_2[0]*UI.SCALE.get(),
+        UI.SCALE.get() + 10*UI.SCALE.get() - X_spot_2[1]*UI.SCALE.get(),
+        fill="#f54242",
+        width=2,
+        tags="line"
+    )
 
-def redraw_spots():
-    # Перерисовываем все сохраненные точки
-    for pt in UI.points:
-        draw_spot(pt["H"], pt["V"], pt["color"], pt["name"], redraw=True)
+    UI.canvas.create_line(
+        UI.SCALE.get() + 10*UI.SCALE.get() - Y_spot_1[0]*UI.SCALE.get(),
+        UI.SCALE.get() + 10*UI.SCALE.get() - Y_spot_1[1]*UI.SCALE.get(),
+        UI.SCALE.get() + 10*UI.SCALE.get() - Y_spot_2[0]*UI.SCALE.get(),
+        UI.SCALE.get() + 10*UI.SCALE.get() - Y_spot_2[1]*UI.SCALE.get(),
+        fill="#5af542",
+        width=2,
+        tags="line"
+    )
 
-def take_cords():
+    UI.canvas.create_line(
+        UI.SCALE.get() + 10*UI.SCALE.get() - Z_spot_1[0]*UI.SCALE.get(),
+        UI.SCALE.get() + 10*UI.SCALE.get() - Z_spot_1[1]*UI.SCALE.get(),
+        UI.SCALE.get() + 10*UI.SCALE.get() - Z_spot_2[0]*UI.SCALE.get(),
+        UI.SCALE.get() + 10*UI.SCALE.get() - Z_spot_2[1]*UI.SCALE.get(),
+        fill="#424bf5",
+        width=2,
+        tags="line"
+    )
+
+    if (redraw == False):
+        line_data = {
+            "X1": X_spot_1,
+            "Y1": Y_spot_1,
+            "Z1": Z_spot_1,
+            "X2": X_spot_2,
+            "Y2": Y_spot_2,
+            "Z2": Z_spot_2
+        }
+        UI.lines.append(line_data)
+
+def take_spot_cords():
     X = float(UI.cords_taker_x.get())
     Y = float(UI.cords_taker_y.get())
     Z = float(UI.cords_taker_z.get())
@@ -61,9 +92,50 @@ def take_cords():
     draw_spot(X, -Y, "#5af542", name, redraw)
     draw_spot(-Y, Z, "#424bf5", name, redraw)
 
+def take_line_cords():
+    spot1 = UI.spot_taker_1.get()
+    X_spot_1 = []
+    Y_spot_1 = []
+    Z_spot_1 = []
+
+    spot2 = UI.spot_taker_2.get()
+    X_spot_2 = []
+    Y_spot_2 = []
+    Z_spot_2 = []
+
+    for i in UI.points:
+        print(i)
+
+        if spot1+"2" == i['name']:
+            X_spot_1 = [i['H'], i['V']]
+        elif spot1+"1" == i['name']:
+            Y_spot_1 = [i['H'], i['V']]
+        elif spot1+"3" == i['name']:
+            Z_spot_1 = [i['H'], i['V']]
+        elif spot2+"2" == i['name']:
+            X_spot_2 = [i['H'], i['V']]
+        elif spot2+"1" == i['name']:
+            Y_spot_2 = [i['H'], i['V']]
+        elif spot2+"3" == i['name']:
+            Z_spot_2 = [i['H'], i['V']]
+
+    draw_line(X_spot_1, Y_spot_1, Z_spot_1, X_spot_2, Y_spot_2, Z_spot_2, False)
+
+def redraw_spots():
+    for pt in UI.points:
+        draw_spot(pt["H"], pt["V"], pt["color"], pt["name"][:-1], redraw=True)
+
+def redraw_lines():
+    for ln in UI.lines:
+        draw_line(ln["X1"], ln["Y1"], ln["Z1"], ln["X2"], ln["Y2"], ln["Z2"], redraw=True)
+
 def clear_spots():
     UI.canvas.delete("spot")
     UI.points.clear()
+
+def clear_lines():
+    UI.canvas.delete("line")
+    UI.lines.clear()
 
 def resize_canvas(event=None):
     UI.canvas.config(bg="white", width=22*UI.SCALE.get(), height=22*UI.SCALE.get()) # Канвас...
@@ -82,6 +154,7 @@ def resize_canvas(event=None):
         UI.canvas.create_line(xp, r*UI.SCALE.get(), 21*UI.SCALE.get(), r*UI.SCALE.get())
 
     redraw_spots()
+    redraw_lines()
 
 
 
