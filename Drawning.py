@@ -35,7 +35,7 @@ def draw_spot(H, V, color, name, redraw):
             "x": text_x,
             "y": text_y
         }
-        G.points.append(point_data)
+        UI.points.append(point_data)
 
 def take_2_spots():
     # spot1 = spot_taker_1.get()
@@ -45,7 +45,7 @@ def take_2_spots():
 
 def redraw_spots():
     # Перерисовываем все сохраненные точки
-    for pt in G.points:
+    for pt in UI.points:
         draw_spot(pt["H"], pt["V"], pt["color"], pt["name"], redraw=True)
 
 def take_cords():
