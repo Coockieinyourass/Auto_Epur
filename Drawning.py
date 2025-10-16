@@ -1,15 +1,14 @@
 from tkinter import *
-import Globals as G
 import UI
 
 
 
 def draw_spot(H, V, color, name, redraw):
     # Координаты для точки
-    x1 = G.SCALE.get() + 10*G.SCALE.get() - H*G.SCALE.get() - G.SCALE.get()/5
-    y1 = G.SCALE.get() + 10*G.SCALE.get() - V*G.SCALE.get() - G.SCALE.get()/5
-    x2 = G.SCALE.get() + 10*G.SCALE.get() + G.SCALE.get()/5 - H*G.SCALE.get()
-    y2 = G.SCALE.get() + 10*G.SCALE.get() + G.SCALE.get()/5 - V*G.SCALE.get()
+    x1 = UI.SCALE.get() + 10*UI.SCALE.get() - H*UI.SCALE.get() - UI.SCALE.get()/5
+    y1 = UI.SCALE.get() + 10*UI.SCALE.get() - V*UI.SCALE.get() - UI.SCALE.get()/5
+    x2 = UI.SCALE.get() + 10*UI.SCALE.get() + UI.SCALE.get()/5 - H*UI.SCALE.get()
+    y2 = UI.SCALE.get() + 10*UI.SCALE.get() + UI.SCALE.get()/5 - V*UI.SCALE.get()
 
     UI.canvas.create_oval(x1, y1, x2, y2, fill=color, tags="spot")
     # Индексирование в зависимости от плоскости проекции
@@ -22,8 +21,8 @@ def draw_spot(H, V, color, name, redraw):
     else:
         text = name
 
-    text_x = G.SCALE.get() + 9.7*G.SCALE.get() - H*G.SCALE.get()
-    text_y = G.SCALE.get() + 9.7*G.SCALE.get() - V*G.SCALE.get()
+    text_x = UI.SCALE.get() + 9.7*UI.SCALE.get() - H*UI.SCALE.get()
+    text_y = UI.SCALE.get() + 9.7*UI.SCALE.get() - V*UI.SCALE.get()
 
     UI.canvas.create_text(text_x, text_y, text=text, tags="spot")
 
@@ -67,19 +66,19 @@ def clear_spots():
     UI.points.clear()
 
 def resize_canvas(event=None):
-    UI.canvas.config(bg="white", width=22*G.SCALE.get(), height=22*G.SCALE.get()) # Канвас...
+    UI.canvas.config(bg="white", width=22*UI.SCALE.get(), height=22*UI.SCALE.get()) # Канвас...
     UI.canvas.delete("all")
 
-    xp = G.SCALE.get()
-    yp = G.SCALE.get()
+    xp = UI.SCALE.get()
+    yp = UI.SCALE.get()
 
-    UI.canvas.create_line(xp+10*G.SCALE.get(), yp, xp+10*G.SCALE.get(), yp+20*G.SCALE.get(), width=3.5) # Основные линии координат
-    UI.canvas.create_line(xp, yp+10*G.SCALE.get(), xp+20*G.SCALE.get(), yp+10*G.SCALE.get(), width=3.5)
-    UI.canvas.create_line(xp, yp, xp+20*G.SCALE.get(), yp+20*G.SCALE.get()) # Диагональ
+    UI.canvas.create_line(xp+10*UI.SCALE.get(), yp, xp+10*UI.SCALE.get(), yp+20*UI.SCALE.get(), width=3.5) # Основные линии координат
+    UI.canvas.create_line(xp, yp+10*UI.SCALE.get(), xp+20*UI.SCALE.get(), yp+10*UI.SCALE.get(), width=3.5)
+    UI.canvas.create_line(xp, yp, xp+20*UI.SCALE.get(), yp+20*UI.SCALE.get()) # Диагональ
 
     for c in range (22): # сетка 
-        UI.canvas.create_line(c*G.SCALE.get(), yp, c*G.SCALE.get(), 21*G.SCALE.get())
+        UI.canvas.create_line(c*UI.SCALE.get(), yp, c*UI.SCALE.get(), 21*UI.SCALE.get())
     for r in range (22):
-        UI.canvas.create_line(xp, r*G.SCALE.get(), 21*G.SCALE.get(), r*G.SCALE.get())
+        UI.canvas.create_line(xp, r*UI.SCALE.get(), 21*UI.SCALE.get(), r*UI.SCALE.get())
 
     redraw_spots()

@@ -1,6 +1,6 @@
 from tkinter import *
 import UI
-import Globals as G
+
 
 
 
