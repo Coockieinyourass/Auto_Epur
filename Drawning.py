@@ -82,3 +82,11 @@ def resize_canvas(event=None):
         UI.canvas.create_line(xp, r*UI.SCALE.get(), 21*UI.SCALE.get(), r*UI.SCALE.get())
 
     redraw_spots()
+
+
+
+def pick_panel(list_of_panels, picked_panel):
+    for i in list_of_panels:
+        i.pack_forget()
+
+    picked_panel.pack(anchor="se", side="bottom", padx=UI.SCALE.get(), pady=UI.SCALE.get()/5)
