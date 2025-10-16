@@ -3,7 +3,8 @@ import Drawning
 
 
 
-root = Tk() # Корневой объект - окно
+# Main window
+root = Tk()
 root.title("Auto Epur maker")
 root.geometry("1400x1200")
 
